@@ -6,10 +6,28 @@ $font: Arial;
   margin-top: 0rem;
   margin-left: 3rem;
   margin-right: 3rem;
-  /* border-top: 2px solid green; */
-}
-
-.contentbox {
   background-color: $color;
   padding: 0rem 2rem 2rem 2rem;
+  border-radius: 1rem;
+}
+.timeBox {
+  // background-color: aquamarine;
+  line-height: 0.1rem;
+}
+.dataWeather {
+  // background-color: aquamarine;
+  display: flex;
+  line-height: 0.1rem;
+}
+.dataWeather div {
+  margin-right: 1rem;
+  padding-right: 1rem;
+  border-right: 1px dashed;
+  border-color: grey;
+}
+.dataWeather div h5 {
+  color: grey;
+}
+#temp {
+  font-size: 3rem;
 }

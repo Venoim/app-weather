@@ -11,41 +11,30 @@ const Result = (props) => {
     const sunriseTime = new Date(sunrise * 1000).toLocaleTimeString();
     const sunsetTime = new Date(sunset * 1000).toLocaleTimeString();
     content = (
-      <div className="contentbox">
+      <div>
         <div>
-          <h2>Pogoda {city}</h2>
-        </div>
-        <div>
-          <span>
+          <h1>Pogoda {city}</h1>
+          <div className="timeBox">
             Wschód słonca {sunriseTime} zachod {sunsetTime}
-          </span>
-          <h4>
-            <span>teraz</span> : {date}
-          </h4>
-          <p>
-            Wschód słonca {sunriseTime} zachod {sunsetTime}
-          </p>
+            <h4>
+              <span>teraz</span> : {date}
+            </h4>
+          </div>
           <div>
-            <div>
+            <div className="dataWeather">
               <div>
-                <h4>Temperatura</h4>
-                <span>{temp}&#186;C</span>
+                <h4>ikona pogody</h4>
+                <span id="temp">{temp}&#186;</span>
+                <h5>Odczuwalna:</h5>
+                {feels_like}&#186;C
               </div>
               <div>
-                <div>
-                  <div>
-                    <h5>Odczuwalna:</h5>
-                    <span>{feels_like}&#186;C</span>
-                  </div>
-                  <div>
-                    <h5>Ciśnienie atmosferyczne</h5>
-                    <span>{pressure} hPA</span>
-                  </div>
-                  <div>
-                    <h5>Wiatr</h5>
-                    <span>Predkość: {wind} m/s</span>
-                  </div>
-                </div>
+                <h5>Wiatr</h5>
+                <span>Predkość: {wind} m/s</span>
+              </div>
+              <div>
+                <h5>Ciśnienie atmosferyczne</h5>
+                <span>{pressure} hPA</span>
               </div>
             </div>
           </div>

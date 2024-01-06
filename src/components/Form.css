@@ -1,8 +1,11 @@
 form {
-  padding: 0rem;
+  margin-top: 1rem;
+  margin-bottom: 0rem;
   text-align: center;
 }
 input {
   border-radius: 0.5rem;
   text-align: center;
+  height: 20px;
+  font-size: 16px;
 }
