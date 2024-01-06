@@ -1,8 +1,9 @@
 import React from "react";
-import "./Result.css";
+// import "./Result.css";
+import "./Resultstyle.scss";
 
 const Result = (props) => {
-  const { date, city, sunrise, sunset, temp, pressure, wind, err } =
+  const { date, city, sunrise, sunset, temp, feels_like, pressure, wind, err } =
     props.weather;
   let content = null;
 
@@ -10,15 +11,46 @@ const Result = (props) => {
     const sunriseTime = new Date(sunrise * 1000).toLocaleTimeString();
     const sunsetTime = new Date(sunset * 1000).toLocaleTimeString();
     content = (
-      <>
-        <h3>Wyszukiwanie dla miasta {city}</h3>
-        <h4>Data i godzina {date}</h4>
-        <h4>Temperatura {temp} &#176;C</h4>
-        <h4>Wschod słonca {sunriseTime}</h4>
-        <h4>Zachod {sunsetTime}</h4>
-        <h4>Predkosc wiatru {wind} m/s</h4>
-        <h4>Cisnienie {pressure} hPa</h4>
-      </>
+      <div className="contentbox">
+        <div>
+          <h2>Pogoda {city}</h2>
+        </div>
+        <div>
+          <span>
+            Wschód słonca {sunriseTime} zachod {sunsetTime}
+          </span>
+          <h4>
+            <span>teraz</span> : {date}
+          </h4>
+          <p>
+            Wschód słonca {sunriseTime} zachod {sunsetTime}
+          </p>
+          <div>
+            <div>
+              <div>
+                <h4>Temperatura</h4>
+                <span>{temp}&#186;C</span>
+              </div>
+              <div>
+                <div>
+                  <div>
+                    <h5>Odczuwalna:</h5>
+                    <span>{feels_like}&#186;C</span>
+                  </div>
+                  <div>
+                    <h5>Ciśnienie atmosferyczne</h5>
+                    <span>{pressure} hPA</span>
+                  </div>
+                  <div>
+                    <h5>Wiatr</h5>
+                    <span>Predkość: {wind} m/s</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     );
   }
 

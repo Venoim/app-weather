@@ -1,0 +1,15 @@
+$color: rgb(230, 230, 230);
+$colortext: black;
+$font: Arial;
+
+.result {
+  margin-top: 0rem;
+  margin-left: 3rem;
+  margin-right: 3rem;
+  /* border-top: 2px solid green; */
+}
+
+.contentbox {
+  background-color: $color;
+  padding: 0rem 2rem 2rem 2rem;
+}
