@@ -3,9 +3,21 @@ import React from "react";
 import "./Resultstyle.scss";
 
 const Result = (props) => {
-  const { date, city, sunrise, sunset, temp, feels_like, pressure, wind, err } =
-    props.weather;
+  const {
+    date,
+    city,
+    // weather,
+    sunrise,
+    sunset,
+    temp,
+    feels_like,
+    pressure,
+    wind,
+    err,
+  } = props.weather;
+  const icon = props.iconWeather;
   let content = null;
+  console.log({ icon });
 
   if (!err && city) {
     const sunriseTime = new Date(sunrise * 1000).toLocaleTimeString();
@@ -23,14 +35,16 @@ const Result = (props) => {
           <div>
             <div className="dataWeather">
               <div>
-                <h4>ikona pogody</h4>
+                <h3>Polaczenie {icon} </h3>
                 <span id="temp">{temp}&#186;</span>
                 <h5>Odczuwalna:</h5>
                 {feels_like}&#186;C
               </div>
               <div>
                 <h5>Wiatr</h5>
-                <span>Predkość: {wind} m/s</span>
+                <p>Kierunek: {wind} m/s</p>
+                <p>Predkość: {wind} m/s</p>
+                <p>w porywach: {wind} m/s</p>
               </div>
               <div>
                 <h5>Ciśnienie atmosferyczne</h5>

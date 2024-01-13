@@ -5,14 +5,16 @@ import Footer from "./Footer";
 import "./App.css";
 import { Component } from "react";
 
-//klucz do API
+// //klucz do API
 const APIKey = "8111c344d5b4e675f9b32e6c7c37beee";
+let icon = "";
 
 class App extends Component {
   state = {
     value: "",
     date: "",
     city: "",
+    weather: "",
     sunrise: "",
     sunset: "",
     temp: "",
@@ -28,81 +30,51 @@ class App extends Component {
       value: e.target.value,
     });
   };
-  // handleCitySubmit = (e) => {  //Obsługa przycisku
-  //   e.preventDefault();
-  //   // console.log("potwierdzony formularz");
-  //   const API = `https://api.openweathermap.org/data/2.5/weather?q=${this.state.value}&appid=${APIKey}&units=metric`;
+  handleCitySubmit = async (e) => {
+    //Obsługa przycisku
+    e.preventDefault();
+    // console.log("potwierdzony formularz");
+    const API = `https://api.openweathermap.org/data/2.5/weather?q=${this.state.value}&appid=${APIKey}&units=metric`;
 
-  //   fetch(API)
-  //     .then((response) => {
-  //       if (response.ok) {
-  //         return response;
-  //       }
-  //       throw Error("oj nie działa");
-  //     })
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       const time = new Date().toLocaleString();
-  //       this.setState((prevState) => ({
-  //         err: false,
-  //         date: time,
-  //         sunrise: data.sys.sunrise,
-  //         sunset: data.sys.sunset,
-  //         temp: data.main.temp,
-  //         pressure: data.main.pressure,
-  //         wind: data.wind.speed,
-  //         city: prevState.value,
-  //       }));
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //       this.setState((prevState) => ({
-  //         err: true,
-  //         city: prevState.value,
-  //       }));
-  //     });
-  // };
+    try {
+      const response = await fetch(API);
+      if (!response.ok) {
+        throw Error("oj nie działa");
+      }
+      const data = await response.json();
 
-  componentDidUpdate(prevProps, prevState) {
-    //funkcaj aktualizujaca na bierzaco z wpisywaniej nowej wartosci
-    // console.log("pop wartosc" + prevState.value);
-    // console.log("aktualna wartosc" + this.state.value);
-    if (this.state.value.length === 0) return;
-    if (prevState.value !== this.state.value) {
-      const API = `https://api.openweathermap.org/data/2.5/weather?q=${this.state.value}&appid=${APIKey}&units=metric`;
-
-      fetch(API) // metoda pobierania danych API
-        .then((response) => {
-          if (response.ok) {
-            return response;
-          }
-          throw Error("oj nie działa");
-        })
-        .then((response) => response.json())
-        .then((data) => {
-          const time = new Date().toLocaleString();
-          this.setState((prevState) => ({
-            err: false,
-            date: time,
-            sunrise: data.sys.sunrise,
-            sunset: data.sys.sunset,
-            temp: data.main.temp,
-            feels_like: data.main.feels_like,
-            pressure: data.main.pressure,
-            wind: data.wind.speed,
-            city: prevState.value,
-          }));
-        })
-        .catch((err) => {
-          console.log(err);
-          this.setState((prevState) => ({
-            err: true,
-            city: prevState.value,
-          }));
-        });
+      const time = new Date().toLocaleString();
+      this.setState((prevState) => ({
+        err: false,
+        date: time,
+        weather: data.weather[0].icon,
+        sunrise: data.sys.sunrise,
+        sunset: data.sys.sunset,
+        temp: data.main.temp,
+        feels_like: data.main.feels_like,
+        pressure: data.main.pressure,
+        wind: data.wind.speed,
+        city: prevState.value,
+      }));
+    } catch (error) {
+      this.setState((prevState) => ({
+        err: true,
+        city: prevState.value,
+      }));
     }
-  }
+  };
 
+  handleWeatherIcon = (e) => {
+    const iconCode = this.state.weather; // Załóżmy, że e.state.weather to tablica z jednym obiektem pogodowym
+    console.log("Ikona: " + iconCode);
+
+    const iconUrl = `http://openweathermap.org/img/wn/${iconCode}.png?appid=${APIKey}`;
+    return (
+      <div>
+        <img src={iconUrl} alt="Weather Icon" />
+      </div>
+    );
+  };
   render() {
     return (
       <div className="App">
@@ -110,9 +82,9 @@ class App extends Component {
         <Form
           value={this.state.value}
           change={this.handleImputChange}
-          // submit={this.handleCitySubmit} //Obsługa przycisku
+          submit={this.handleCitySubmit} //Obsługa przycisku
         />
-        <Result weather={this.state} />
+        <Result weather={this.state} iconWeather={this.handleWeatherIcon()} />
         <Footer />
       </div>
     );
@@ -120,7 +92,7 @@ class App extends Component {
 }
 
 export default App;
-
+// Wzor obiektu
 // const obj = {
 //   coord: { lon: 18.5418, lat: 50.0971 },
 //   weather: [
@@ -151,3 +123,44 @@ export default App;
 //   name: "Rybnik",
 //   cod: 200,
 // };
+
+//
+//   // componentDidUpdate(prevProps, prevState) {
+//   //   //funkcaj aktualizujaca na bierzaco z wpisywaniej nowej wartosci
+//   //   // console.log("pop wartosc" + prevState.value);
+//   //   // console.log("aktualna wartosc" + this.state.value);
+//   //   if (this.state.value.length === 0) return;
+//   //   if (prevState.value !== this.state.value) {
+//   //     const API = `https://api.openweathermap.org/data/2.5/weather?q=${this.state.value}&appid=${APIKey}&units=metric`;
+
+//   //     fetch(API) // metoda pobierania danych API
+//   //       .then((response) => {
+//   //         if (response.ok) {
+//   //           return response;
+//   //         }
+//   //         throw Error("oj nie działa");
+//   //       })
+//   //       .then((response) => response.json())
+//   //       .then((data) => {
+//   //         const time = new Date().toLocaleString();
+//   //         this.setState((prevState) => ({
+//   //           err: false,
+//   //           date: time,
+//   //           sunrise: data.sys.sunrise,
+//   //           sunset: data.sys.sunset,
+//   //           temp: data.main.temp,
+//   //           feels_like: data.main.feels_like,
+//   //           pressure: data.main.pressure,
+//   //           wind: data.wind.speed,
+//   //           city: prevState.value,
+//   //         }));
+//   //       })
+//   //       .catch((err) => {
+//   //         console.log(err);
+//   //         this.setState((prevState) => ({
+//   //           err: true,
+//   //           city: prevState.value,
+//   //         }));
+//   //       });
+//   //   }
+//   // }
