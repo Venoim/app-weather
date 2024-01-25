@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/app-weather/static/css/main.c9a730e5.css",
-    "main.js": "/app-weather/static/js/main.96f4171f.js",
+    "main.js": "/app-weather/static/js/main.25337e5f.js",
     "static/js/787.23cb5566.chunk.js": "/app-weather/static/js/787.23cb5566.chunk.js",
     "index.html": "/app-weather/index.html",
     "main.c9a730e5.css.map": "/app-weather/static/css/main.c9a730e5.css.map",
-    "main.96f4171f.js.map": "/app-weather/static/js/main.96f4171f.js.map",
+    "main.25337e5f.js.map": "/app-weather/static/js/main.25337e5f.js.map",
     "787.23cb5566.chunk.js.map": "/app-weather/static/js/787.23cb5566.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.c9a730e5.css",
-    "static/js/main.96f4171f.js"
+    "static/js/main.25337e5f.js"
   ]
 }
